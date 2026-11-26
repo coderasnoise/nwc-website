@@ -1,0 +1,51 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { site } from '../config/site';
+import type { Lang } from '../i18n';
+import { localePath } from '../i18n';
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  path: string; // canonical path of this page
+  alternates?: { en?: string; tr?: string };
+  jsonLd?: object[];
+  noindex?: boolean;
+}
+const { lang, title, description, path, alternates = {}, jsonLd = [], noindex = false } = Astro.props;
+const canonical = new URL(path, site.url).href;
+const alt = alternates[lang === 'en' ? 'tr' : 'en'] ?? localePath(lang === 'en' ? 'tr' : 'en', '/');
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.en && <link rel="alternate" hreflang="en" href={new URL(alternates.en, site.url).href} />}
+    {alternates.tr && <link rel="alternate" hreflang="tr" href={new URL(alternates.tr, site.url).href} />}
+    {alternates.en && <link rel="alternate" hreflang="x-default" href={new URL(alternates.en, site.url).href} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'tr_TR'} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/placeholders/logo.svg" type="image/svg+xml" />
+    {jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  </head>
+  <body class="bg-white font-sans text-slate-800 antialiased">
+    <Header lang={lang} altHref={alt} />
+    <main><slot /></main>
+    <Footer lang={lang} />
+    <div class="fixed inset-x-0 bottom-0 z-30 bg-white/95 p-3 shadow-[0_-4px_12px_rgba(0,0,0,.08)] sm:hidden">
+      <div class="flex justify-center"><WhatsAppButton lang={lang} /></div>
+    </div>
+    <div class="h-16 sm:hidden"></div>
+  </body>
+</html>
