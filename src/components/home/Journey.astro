@@ -1,0 +1,17 @@
+---
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const steps = [
+  [pick(lang, 'Message us', 'Bize yazın'), pick(lang, 'Free online consultation on WhatsApp.', 'WhatsApp’ta ücretsiz online konsültasyon.')],
+  [pick(lang, 'Your personal plan', 'Kişisel planınız'), pick(lang, 'Dr. Aksan prepares a surgery plan and quote for you.', 'Dr. Aksan size özel ameliyat planı ve teklif hazırlar.')],
+  [pick(lang, 'Travel and surgery', 'Seyahat ve ameliyat'), pick(lang, 'You come to Istanbul only when you decide to go ahead.', 'Karar verdiğinizde İstanbul’a gelirsiniz.')],
+  [pick(lang, 'Recovery and follow-up', 'İyileşme ve takip'), pick(lang, 'Aftercare and check-ups are planned with you.', 'Bakım ve kontroller sizinle birlikte planlanır.')],
+];
+---
+<section class="mx-auto max-w-6xl px-5 py-16">
+  <h2 class="text-3xl font-bold">{pick(lang, 'Your journey in four steps', 'Dört adımda süreç')}</h2>
+  <ol class="mt-8 grid gap-6 md:grid-cols-4">
+    {steps.map(([a, b], i) => <li class="rounded-xl border border-navy/10 p-5"><span class="font-display text-3xl text-navy/30">{i + 1}</span><h3 class="mt-2 font-semibold">{a}</h3><p class="mt-1 text-sm text-slate-600">{b}</p></li>)}
+  </ol>
+</section>

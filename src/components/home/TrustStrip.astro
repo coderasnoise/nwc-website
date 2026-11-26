@@ -1,0 +1,16 @@
+---
+import { site } from '../../config/site';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const items = [
+  [pick(lang, 'Turkish board-certified', 'Türk board sertifikalı'), pick(lang, 'Plastic surgery', 'Plastik cerrahi')],
+  [site.stats.operations, pick(lang, 'operations', 'ameliyat')],
+  [site.stats.years, pick(lang, 'years of experience', 'yıllık deneyim')],
+];
+---
+<section class="border-y border-navy/10">
+  <dl class="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-5 py-8 text-center sm:grid-cols-3">
+    {items.map(([a, b]) => <div><dt class="font-display text-2xl font-bold text-navy">{a}</dt><dd class="text-sm text-slate-600">{b}</dd></div>)}
+  </dl>
+</section>

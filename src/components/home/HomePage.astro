@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from './Hero.astro';
+import TrustStrip from './TrustStrip.astro';
+import AboutDoctor from './AboutDoctor.astro';
+import ProcedureGrid from './ProcedureGrid.astro';
+import Journey from './Journey.astro';
+import Reviews from './Reviews.astro';
+import Faq from './Faq.astro';
+import ClosingCta from './ClosingCta.astro';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<Base lang={lang}
+  title={pick(lang, 'Dr. Tolga Aksan | Plastic Surgeon in Istanbul | North Western Clinic', 'Dr. Tolga Aksan | İstanbul Plastik Cerrah | North Western Clinic')}
+  description={pick(lang, 'Facial rejuvenation and body contouring with Turkish board-certified plastic surgeon Dr. Tolga Aksan in Istanbul. Free online consultation on WhatsApp.', 'İstanbul’da Türk board sertifikalı plastik cerrah Dr. Tolga Aksan ile yüz gençleştirme ve vücut şekillendirme. WhatsApp’tan ücretsiz online konsültasyon.')}
+  path={pick(lang, '/', '/tr/')} alternates={{ en: '/', tr: '/tr/' }}>
+  <Hero lang={lang} /><TrustStrip lang={lang} /><AboutDoctor lang={lang} /><ProcedureGrid lang={lang} />
+  <Journey lang={lang} /><Reviews lang={lang} /><Faq lang={lang} /><ClosingCta lang={lang} />
+</Base>

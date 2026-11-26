@@ -1,0 +1,16 @@
+---
+import { site } from '../../config/site';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<section class="bg-navy text-white">
+  <div class="mx-auto max-w-6xl px-5 py-14 text-center">
+    <h2 class="!text-white text-3xl font-bold">{pick(lang, 'What patients say', 'Hastalarımız ne diyor')}</h2>
+    <p class="mx-auto mt-3 max-w-xl text-white/80">{pick(lang, 'Read independent reviews from our patients.', 'Hastalarımızın bağımsız yorumlarını okuyun.')}</p>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      <a href={site.reviewLinks.trustpilot} rel="noopener" target="_blank" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy">{pick(lang, 'Reviews on Trustpilot', 'Trustpilot yorumları')}</a>
+      <a href={site.reviewLinks.google} rel="noopener" target="_blank" class="rounded-full border border-white px-6 py-3 text-sm font-semibold">{pick(lang, 'Reviews on Google', 'Google yorumları')}</a>
+    </div>
+  </div>
+</section>

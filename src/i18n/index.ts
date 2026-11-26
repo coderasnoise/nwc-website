@@ -20,3 +20,7 @@ export function t(lang: Lang, key: string, vars: Record<string, string> = {}): s
   if (value === undefined) throw new Error(`Missing i18n key "${key}" for "${lang}"`);
   return Object.entries(vars).reduce((s, [k, v]) => s.replaceAll(`{${k}}`, v), value);
 }
+
+export function pick<T>(lang: Lang, en: T, tr: T): T {
+  return lang === 'en' ? en : tr;
+}

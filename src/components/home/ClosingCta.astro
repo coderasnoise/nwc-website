@@ -1,0 +1,13 @@
+---
+import { pick, type Lang } from '../../i18n';
+import WhatsAppButton from '../WhatsAppButton.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+<section class="bg-sand">
+  <div class="mx-auto max-w-3xl px-5 py-16 text-center">
+    <h2 class="text-3xl font-bold">{pick(lang, 'Start with a free online consultation', 'Ücretsiz online konsültasyonla başlayın')}</h2>
+    <p class="mt-3 text-slate-700">{pick(lang, 'Tell us what you have in mind. You will receive a personal plan and quote on WhatsApp.', 'Aklınızdakini yazın. Kişisel plan ve teklifi WhatsApp’tan alırsınız.')}</p>
+    <div class="mt-6 flex justify-center"><WhatsAppButton lang={lang} /></div>
+  </div>
+</section>

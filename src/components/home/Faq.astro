@@ -1,0 +1,13 @@
+---
+import { getEntry } from 'astro:content';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const entry = await getEntry('faq', lang);
+---
+<section class="mx-auto max-w-3xl px-5 py-16">
+  <h2 class="text-3xl font-bold">{pick(lang, 'Frequently asked questions', 'Sık sorulan sorular')}</h2>
+  <div class="mt-6 divide-y divide-navy/10 border-y border-navy/10">
+    {entry!.data.items.map((i) => <details class="py-4"><summary class="cursor-pointer font-semibold text-navy">{i.q}</summary><p class="mt-2 text-slate-700">{i.a}</p></details>)}
+  </div>
+</section>

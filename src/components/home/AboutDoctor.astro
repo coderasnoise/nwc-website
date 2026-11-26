@@ -1,0 +1,18 @@
+---
+import { getEntry, render } from 'astro:content';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const entry = await getEntry('doctor', lang);
+const { Content } = await render(entry!);
+const href = pick(lang, '/doctor/', '/tr/doktor/');
+---
+<section class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2">
+  <img src="/placeholders/doctor-casual.svg" alt={pick(lang, 'Dr. Aksan (placeholder photo)', 'Dr. Aksan (yer tutucu fotoğraf)')} width="600" height="750" loading="lazy" class="w-full max-w-md rounded-2xl" />
+  <div class="space-y-4">
+    <p class="text-xs font-semibold uppercase tracking-widest text-navy/70">{pick(lang, 'About the surgeon', 'Cerrah hakkında')}</p>
+    <h2 class="text-3xl font-bold">{entry!.data.name}</h2>
+    <div class="space-y-3 text-slate-700"><Content /></div>
+    <a href={href} class="inline-block font-semibold text-navy underline">{pick(lang, 'Get to know Dr. Aksan', 'Dr. Aksan’ı tanıyın')}</a>
+  </div>
+</section>
