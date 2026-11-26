@@ -9,10 +9,10 @@ const posts = (await getCollection('blog', (e) => e.id.startsWith(`${lang}/`) &&
 ---
 <Base lang={lang} title={pick(lang, 'Blog | North Western Clinic', 'Blog yazıları | North Western Clinic')} description={pick(lang, 'Articles by Dr. Tolga Aksan.', 'Dr. Tolga Aksan’dan yazılar.')}
   path={base} alternates={{ en: '/blog/', tr: '/tr/blog/' }}>
-  <section class="mx-auto max-w-3xl px-5 py-12">
-    <h1 class="text-4xl font-bold">Blog</h1>
+  <section class="wrap max-w-3xl py-16">
+    <h1 class="text-4xl md:text-5xl">Blog</h1>
     <ul class="mt-8 space-y-6">
-      {posts.map((p) => <li><a href={`${base}${p.id.split('/')[1]}/`} class="block"><span class="font-display text-xl font-bold text-navy">{p.data.title}</span><span class="block text-sm text-slate-500">{p.data.date.toISOString().slice(0, 10)}</span></a></li>)}
+      {posts.map((p) => <li><a href={`${base}${p.id.split('/')[1]}/`} class="block"><span class="font-display text-xl text-navy">{p.data.title}</span><span class="block text-sm text-muted">{p.data.date.toISOString().slice(0, 10)}</span></a></li>)}
     </ul>
   </section>
 </Base>

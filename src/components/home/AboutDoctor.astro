@@ -7,12 +7,14 @@ const entry = await getEntry('doctor', lang);
 const { Content } = await render(entry!);
 const href = pick(lang, '/doctor/', '/tr/doktor/');
 ---
-<section class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2">
-  <img src="/placeholders/doctor-casual.svg" alt={pick(lang, 'Dr. Aksan (placeholder photo)', 'Dr. Aksan (yer tutucu fotoğraf)')} width="600" height="750" loading="lazy" class="w-full max-w-md rounded-2xl" />
-  <div class="space-y-4">
-    <p class="text-xs font-semibold uppercase tracking-widest text-navy/70">{pick(lang, 'About the surgeon', 'Cerrah hakkında')}</p>
-    <h2 class="text-3xl font-bold">{entry!.data.name}</h2>
-    <div class="space-y-3 text-slate-700"><Content /></div>
-    <a href={href} class="inline-block font-semibold text-navy underline">{pick(lang, 'Get to know Dr. Aksan', 'Dr. Aksan’ı tanıyın')}</a>
+<section class="section">
+  <div class="wrap grid items-center gap-14 md:grid-cols-12">
+    <img src="/placeholders/doctor-casual.svg" alt={pick(lang, 'Dr. Aksan (photo to come)', 'Dr. Aksan (fotoğraf eklenecek)')} width="600" height="750" loading="lazy" class="aspect-[4/5] w-full object-cover md:col-span-5" />
+    <div class="md:col-span-6 md:col-start-7">
+      <p class="eyebrow">{pick(lang, 'The surgeon', 'Cerrah')}</p>
+      <h2 class="mt-5">{entry!.data.name}</h2>
+      <div class="mt-8 space-y-4 text-muted"><Content /></div>
+      <a href={href} class="mt-8 inline-block border-b border-ink pb-1 text-ink">{pick(lang, 'More about Dr. Aksan', 'Dr. Aksan hakkında daha fazlası')}</a>
+    </div>
   </div>
 </section>

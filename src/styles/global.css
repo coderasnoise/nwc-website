@@ -1,6 +1,22 @@
+@import '@fontsource-variable/fraunces/opsz.css';
+@import '@fontsource-variable/hanken-grotesk';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-h1,h2,h3{font-family:theme('fontFamily.display');color:theme('colors.navy.DEFAULT')}
-html{scroll-behavior:smooth}
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-ivory text-ink; font-size: 1.0625rem; line-height: 1.7; }
+  h1, h2, h3 { font-family: theme('fontFamily.display'); color: theme('colors.ink'); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; font-variation-settings: 'opsz' 96, 'SOFT' 50; }
+  h1 { @apply text-5xl md:text-7xl; letter-spacing: -0.03em; }
+  h2 { @apply text-3xl md:text-4xl; }
+  a { text-underline-offset: 4px; }
+  ::selection { background: #e6d9c6; }
+}
+
+@layer components {
+  .eyebrow { @apply text-xs font-medium uppercase text-clay; letter-spacing: 0.18em; }
+  .wrap { @apply mx-auto max-w-6xl px-6; }
+  .section { @apply py-20 md:py-28; }
+  .rule { @apply border-t border-line; }
+}

@@ -3,11 +3,21 @@ export default {
   content: ['./src/**/*.{astro,html,md,ts}'],
   theme: {
     extend: {
-      colors: { navy: { DEFAULT: '#0b1f3a', 700: '#14315c', 100: '#e8edf5' }, sand: '#f7f4ef' },
-      fontFamily: {
-        display: ['Georgia', 'Cambria', 'Times New Roman', 'serif'],
-        sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+      colors: {
+        ivory: '#faf7f2',
+        paper: '#f3eee6',
+        ink: '#1a1d24',
+        muted: '#5d6068',
+        line: '#ddd5c8',
+        navy: { DEFAULT: '#14243b', 700: '#1d3556', 100: '#e8edf5' },
+        clay: '#8c6e52',
+        wa: '#1f6b47',
       },
+      fontFamily: {
+        display: ['"Fraunces Variable"', 'Georgia', 'serif'],
+        sans: ['"Hanken Grotesk Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: { tightest: '-0.03em' },
     },
   },
 };

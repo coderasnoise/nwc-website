@@ -1,6 +1,5 @@
 ---
 import { t, localePath, type Lang } from '../i18n';
-import { procedurePath } from '../lib/procedures';
 import LangSwitch from './LangSwitch.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
 interface Props { lang: Lang; altHref: string }
@@ -13,21 +12,21 @@ const nav = [
   ['nav.blog', lang === 'en' ? '/blog/' : '/tr/blog/'],
 ];
 ---
-<header class="sticky top-0 z-30 border-b border-navy/10 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-    <a href={localePath(lang, '/')} class="flex items-center gap-2 font-display text-lg font-bold text-navy">
-      <img src="/placeholders/logo.svg" alt="" width="32" height="32" />
-      North Western Clinic
+<header class="sticky top-0 z-30 border-b border-line bg-ivory/90 backdrop-blur">
+  <div class="wrap flex items-center justify-between gap-4 py-4">
+    <a href={localePath(lang, '/')} class="flex items-center gap-3">
+      <img src="/placeholders/logo.svg" alt="" width="30" height="30" />
+      <span class="font-display text-lg tracking-tight text-ink">North Western <span class="text-clay">Clinic</span></span>
     </a>
-    <nav aria-label="Main" class="hidden items-center gap-6 text-sm text-navy md:flex">
-      {nav.map(([k, href]) => <a href={href} class="hover:underline">{t(lang, k)}</a>)}
+    <nav aria-label="Main" class="hidden items-center gap-9 text-sm text-ink md:flex">
+      {nav.map(([k, href]) => <a href={href} class="text-muted transition-colors hover:text-ink">{t(lang, k)}</a>)}
     </nav>
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-4">
       <LangSwitch lang={lang} href={altHref} />
       <div class="hidden sm:block"><WhatsAppButton lang={lang} label={t(lang, 'nav.cta')} /></div>
     </div>
   </div>
-  <nav aria-label="Main mobile" class="flex gap-4 overflow-x-auto border-t border-navy/10 px-5 py-2 text-sm text-navy md:hidden">
+  <nav aria-label="Main mobile" class="wrap flex gap-6 overflow-x-auto border-t border-line py-2.5 text-sm text-muted md:hidden">
     {nav.map(([k, href]) => <a href={href} class="whitespace-nowrap">{t(lang, k)}</a>)}
   </nav>
 </header>

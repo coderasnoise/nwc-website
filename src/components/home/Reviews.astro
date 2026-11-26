@@ -4,13 +4,12 @@ import { pick, type Lang } from '../../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 ---
-<section class="bg-navy text-white">
-  <div class="mx-auto max-w-6xl px-5 py-14 text-center">
-    <h2 class="!text-white text-3xl font-bold">{pick(lang, 'What patients say', 'Hastalarımız ne diyor')}</h2>
-    <p class="mx-auto mt-3 max-w-xl text-white/80">{pick(lang, 'Read independent reviews from our patients.', 'Hastalarımızın bağımsız yorumlarını okuyun.')}</p>
-    <div class="mt-6 flex flex-wrap justify-center gap-3">
-      <a href={site.reviewLinks.trustpilot} rel="noopener" target="_blank" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy">{pick(lang, 'Reviews on Trustpilot', 'Trustpilot yorumları')}</a>
-      <a href={site.reviewLinks.google} rel="noopener" target="_blank" class="rounded-full border border-white px-6 py-3 text-sm font-semibold">{pick(lang, 'Reviews on Google', 'Google yorumları')}</a>
+<section class="rule">
+  <div class="wrap grid items-center gap-8 py-16 md:grid-cols-12">
+    <h2 class="md:col-span-6">{pick(lang, 'Patients write about their experience in their own words.', 'Hastalarımız deneyimlerini kendi sözleriyle yazıyor.')}</h2>
+    <div class="flex flex-wrap gap-x-8 gap-y-3 md:col-span-5 md:col-start-8 md:justify-end">
+      <a href={site.reviewLinks.trustpilot} rel="noopener" target="_blank" class="border-b border-ink pb-1">{pick(lang, 'Read on Trustpilot', 'Trustpilot’ta oku')}</a>
+      <a href={site.reviewLinks.google} rel="noopener" target="_blank" class="border-b border-ink pb-1">{pick(lang, 'Read on Google', 'Google’da oku')}</a>
     </div>
   </div>
 </section>

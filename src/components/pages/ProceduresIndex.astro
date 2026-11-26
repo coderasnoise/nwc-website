@@ -9,6 +9,6 @@ const { lang } = Astro.props;
 <Base lang={lang} title={pick(lang, 'Procedures | Dr. Tolga Aksan | North Western Clinic', 'İşlemler | Dr. Tolga Aksan | North Western Clinic')}
   description={pick(lang, 'Facial rejuvenation and body surgery performed by Dr. Tolga Aksan in Istanbul.', 'Dr. Tolga Aksan tarafından İstanbul’da yapılan yüz gençleştirme ve vücut ameliyatları.')}
   path={proceduresIndexPath(lang)} alternates={{ en: '/procedures/', tr: '/tr/islemler/' }}>
-  <h1 class="mx-auto max-w-6xl px-5 pt-12 text-4xl font-bold">{pick(lang, 'Procedures', 'İşlemler')}</h1>
+  <h1 class="wrap pt-16 text-5xl md:text-6xl">{pick(lang, 'Procedures', 'İşlemler')}</h1>
   <ProcedureGrid lang={lang} />
 </Base>

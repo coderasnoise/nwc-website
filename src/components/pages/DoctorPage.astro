@@ -13,13 +13,13 @@ const { Content } = await render(entry);
   description={pick(lang, 'Dr. Tolga Aksan, Turkish board-certified plastic surgeon in Istanbul. Co-founder of North Western Clinic.', 'Dr. Tolga Aksan, İstanbul’da Türk board sertifikalı plastik cerrah. North Western Clinic kurucu ortağı.')}
   path={pick(lang, '/doctor/', '/tr/doktor/')} alternates={{ en: '/doctor/', tr: '/tr/doktor/' }}
   jsonLd={[physicianJsonLd(lang), breadcrumbJsonLd([{ name: 'Home', path: pick(lang, '/', '/tr/') }, { name: entry.data.name, path: pick(lang, '/doctor/', '/tr/doktor/') }])]}>
-  <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-2">
-    <img src="/placeholders/doctor-portrait.svg" alt={pick(lang, 'Dr. Tolga Aksan (placeholder portrait)', 'Dr. Tolga Aksan (yer tutucu portre)')} width="600" height="750" class="w-full max-w-md rounded-2xl" />
-    <div class="space-y-4">
-      <h1 class="text-4xl font-bold">{entry.data.name}</h1>
-      <p class="text-lg text-slate-700">{entry.data.title}</p>
+  <div class="wrap grid gap-12 py-16 md:grid-cols-12">
+    <img src="/placeholders/doctor-portrait.svg" alt={pick(lang, 'Dr. Tolga Aksan (placeholder portrait)', 'Dr. Tolga Aksan (yer tutucu portre)')} width="600" height="750" class="aspect-[4/5] w-full object-cover md:col-span-5" />
+    <div class="space-y-5 md:col-span-6 md:col-start-7">
+      <h1 class="text-5xl md:text-6xl">{entry.data.name}</h1>
+      <p class="text-lg text-muted">{entry.data.title}</p>
       <div class="space-y-3"><Content /></div>
-      <div class="flex aspect-video items-center justify-center rounded-xl bg-navy/10 text-sm text-navy/70">{pick(lang, 'Intro video placeholder', 'Tanıtım videosu yer tutucu')}</div>
+      <div class="flex aspect-video items-center justify-center border border-line bg-paper text-sm text-clay">{pick(lang, 'Intro video placeholder', 'Tanıtım videosu yer tutucu')}</div>
       <WhatsAppButton lang={lang} />
     </div>
   </div>

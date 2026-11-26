@@ -3,15 +3,20 @@ import { pick, type Lang } from '../../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const steps = [
-  [pick(lang, 'Message us', 'Bize yazın'), pick(lang, 'Free online consultation on WhatsApp.', 'WhatsApp’ta ücretsiz online konsültasyon.')],
-  [pick(lang, 'Your personal plan', 'Kişisel planınız'), pick(lang, 'Dr. Aksan prepares a surgery plan and quote for you.', 'Dr. Aksan size özel ameliyat planı ve teklif hazırlar.')],
-  [pick(lang, 'Travel and surgery', 'Seyahat ve ameliyat'), pick(lang, 'You come to Istanbul only when you decide to go ahead.', 'Karar verdiğinizde İstanbul’a gelirsiniz.')],
-  [pick(lang, 'Recovery and follow-up', 'İyileşme ve takip'), pick(lang, 'Aftercare and check-ups are planned with you.', 'Bakım ve kontroller sizinle birlikte planlanır.')],
+  [pick(lang, 'A message', 'Bir mesaj'), pick(lang, 'Write to us on WhatsApp. The first consultation is free and online.', 'WhatsApp’tan yazın. İlk konsültasyon ücretsiz ve online.')],
+  [pick(lang, 'Your plan', 'Planınız'), pick(lang, 'Dr. Aksan prepares a surgery plan and a quote for you personally.', 'Dr. Aksan size özel ameliyat planı ve teklif hazırlar.')],
+  [pick(lang, 'Istanbul', 'İstanbul'), pick(lang, 'You travel only once you have decided to go ahead.', 'Yalnızca karar verdikten sonra yola çıkarsınız.')],
+  [pick(lang, 'Afterwards', 'Sonrası'), pick(lang, 'Aftercare and check-ups are agreed with you before you leave.', 'Bakım ve kontroller, ayrılmadan önce sizinle konuşulur.')],
 ];
 ---
-<section class="mx-auto max-w-6xl px-5 py-16">
-  <h2 class="text-3xl font-bold">{pick(lang, 'Your journey in four steps', 'Dört adımda süreç')}</h2>
-  <ol class="mt-8 grid gap-6 md:grid-cols-4">
-    {steps.map(([a, b], i) => <li class="rounded-xl border border-navy/10 p-5"><span class="font-display text-3xl text-navy/30">{i + 1}</span><h3 class="mt-2 font-semibold">{a}</h3><p class="mt-1 text-sm text-slate-600">{b}</p></li>)}
-  </ol>
+<section class="section">
+  <div class="wrap">
+    <div class="grid gap-6 md:grid-cols-12">
+      <p class="eyebrow md:col-span-3">{pick(lang, 'How it works', 'Süreç')}</p>
+      <h2 class="md:col-span-8">{pick(lang, 'From first message to recovery', 'İlk mesajdan iyileşmeye')}</h2>
+    </div>
+    <ol class="mt-14 grid gap-10 md:grid-cols-4">
+      {steps.map(([a, b], i) => <li class="border-t border-ink pt-5"><span class="text-sm text-clay">{String(i + 1).padStart(2, '0')}</span><h3 class="mt-3 text-2xl">{a}</h3><p class="mt-3 text-[0.95rem] text-muted">{b}</p></li>)}
+    </ol>
+  </div>
 </section>
