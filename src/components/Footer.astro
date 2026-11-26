@@ -1,5 +1,5 @@
 ---
-import { site } from '../config/site';
+import { site, REVIEW_NOTICE, REVIEW_NOTICE_TR } from '../config/site';
 import { t, type Lang } from '../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
@@ -27,5 +27,6 @@ const p = (en: string, tr: string) => (lang === 'en' ? en : tr);
       </ul>
     </div>
   </div>
+  {site.draftMode && <p class="bg-amber-100 px-5 py-2 text-center text-xs text-amber-900">{p(REVIEW_NOTICE, REVIEW_NOTICE_TR)}</p>}
   <p class="border-t border-white/10 px-5 py-4 text-center text-xs text-white/60">© {new Date().getFullYear()} North Western Clinic</p>
 </footer>

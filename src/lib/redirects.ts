@@ -21,7 +21,6 @@ const EXACT: Record<string, string> = {
   '/patient-care-coordinators': '/team/',
   '/plasticsurgery': '/procedures/',
   '/other-treatments': '/procedures/',
-  '/reviews': '/reviews/',
   '/patients': '/reviews/',
   '/patient-guide': '/journey/',
   '/faq': '/',

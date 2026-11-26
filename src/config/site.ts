@@ -2,6 +2,8 @@ export const REVIEW_NOTICE = 'Draft: pending professional review';
 export const REVIEW_NOTICE_TR = 'Taslak: profesyonel inceleme bekliyor';
 
 export const site = {
+  // Set to false only at launch (see docs/launch-checklist.md): removes noindex and the draft notice.
+  draftMode: true,
   name: 'North Western Clinic',
   url: 'https://northwesternclinic.com',
   doctor: {

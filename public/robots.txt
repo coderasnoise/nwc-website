@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://northwesternclinic.com/sitemap-index.xml

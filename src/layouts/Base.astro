@@ -35,7 +35,7 @@ const alt = alternates[lang === 'en' ? 'tr' : 'en'] ?? localePath(lang === 'en' 
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'tr_TR'} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {(noindex || site.draftMode) && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/placeholders/logo.svg" type="image/svg+xml" />
     {jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
   </head>

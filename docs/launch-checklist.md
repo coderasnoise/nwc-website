@@ -2,6 +2,7 @@
 
 Nothing here is done by the build. Do not change the domain or deploy until the owner (Batuğ) says go.
 
+- [ ] Set `site.draftMode = false` in `src/config/site.ts` (removes noindex, the draft footer notice and the robots.txt block) and update `tests/launch-guard.test.ts` accordingly.
 - [ ] Confirm the WhatsApp number and phone in `src/config/site.ts`; set the real email (`TODO_CONFIRM_EMAIL`).
 - [ ] Confirm statistics (9000+ operations, 16 years) and set `stats.unverified` to false.
 - [ ] Professional review of privacy, terms, procedure copy, results and medical-advertising wording (Turkey and target countries). Remove the "pending review" notices only after that.
