@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const base = pick(lang, '/blog/', '/tr/blog/');
+const posts = (await getCollection('blog', (e) => e.id.startsWith(`${lang}/`) && !e.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
+---
+<Base lang={lang} title={pick(lang, 'Blog | North Western Clinic', 'Blog | North Western Clinic')} description={pick(lang, 'Articles by Dr. Tolga Aksan.', 'Dr. Tolga Aksan’dan yazılar.')}
+  path={base} alternates={{ en: '/blog/', tr: '/tr/blog/' }}>
+  <section class="mx-auto max-w-3xl px-5 py-12">
+    <h1 class="text-4xl font-bold">Blog</h1>
+    <ul class="mt-8 space-y-6">
+      {posts.map((p) => <li><a href={`${base}${p.id.split('/')[1]}/`} class="block"><span class="font-display text-xl font-bold text-navy">{p.data.title}</span><span class="block text-sm text-slate-500">{p.data.date.toISOString().slice(0, 10)}</span></a></li>)}
+    </ul>
+  </section>
+</Base>
