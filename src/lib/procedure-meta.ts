@@ -1,3 +1,5 @@
+import type { Lang } from '../i18n';
+
 export const PROCEDURE_ORDER = [
   'deep-plane-facelift',
   'necklift',
@@ -22,4 +24,12 @@ export function sortBySlugOrder<T extends { slug: string }>(items: T[]): T[] {
     return i === -1 ? 999 : i;
   };
   return [...items].sort((a, b) => rank(a.slug) - rank(b.slug));
+}
+
+export function procedurePath(lang: Lang, slug: string): string {
+  return lang === 'en' ? `/procedures/${slug}/` : `/tr/islemler/${slug}/`;
+}
+
+export function proceduresIndexPath(lang: Lang): string {
+  return lang === 'en' ? '/procedures/' : '/tr/islemler/';
 }

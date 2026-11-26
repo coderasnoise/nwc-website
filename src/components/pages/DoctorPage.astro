@@ -3,6 +3,7 @@ import { getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import WhatsAppButton from '../WhatsAppButton.astro';
 import { pick, type Lang } from '../../i18n';
+import { physicianJsonLd, breadcrumbJsonLd } from '../../lib/jsonld';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const entry = (await getEntry('doctor', lang))!;
@@ -10,7 +11,8 @@ const { Content } = await render(entry);
 ---
 <Base lang={lang} title={`${entry.data.name} | ${entry.data.title}`}
   description={pick(lang, 'Dr. Tolga Aksan, Turkish board-certified plastic surgeon in Istanbul. Co-founder of North Western Clinic.', 'Dr. Tolga Aksan, İstanbul’da Türk board sertifikalı plastik cerrah. North Western Clinic kurucu ortağı.')}
-  path={pick(lang, '/doctor/', '/tr/doktor/')} alternates={{ en: '/doctor/', tr: '/tr/doktor/' }}>
+  path={pick(lang, '/doctor/', '/tr/doktor/')} alternates={{ en: '/doctor/', tr: '/tr/doktor/' }}
+  jsonLd={[physicianJsonLd(lang), breadcrumbJsonLd([{ name: 'Home', path: pick(lang, '/', '/tr/') }, { name: entry.data.name, path: pick(lang, '/doctor/', '/tr/doktor/') }])]}>
   <div class="mx-auto grid max-w-6xl gap-10 px-5 py-12 md:grid-cols-2">
     <img src="/placeholders/doctor-portrait.svg" alt={pick(lang, 'Dr. Tolga Aksan (placeholder portrait)', 'Dr. Tolga Aksan (yer tutucu portre)')} width="600" height="750" class="w-full max-w-md rounded-2xl" />
     <div class="space-y-4">

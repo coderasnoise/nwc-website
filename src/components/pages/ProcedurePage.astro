@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import WhatsAppButton from '../WhatsAppButton.astro';
 import { getProcedures, procedurePath, proceduresIndexPath } from '../../lib/procedures';
 import { pick, type Lang } from '../../i18n';
+import { procedureJsonLd, breadcrumbJsonLd } from '../../lib/jsonld';
 interface Props { lang: Lang; slug: string }
 const { lang, slug } = Astro.props;
 const entry = (await getCollection('procedures')).find((e) => e.id === `${lang}/${slug}`)!;
@@ -12,7 +13,8 @@ const related = (await getProcedures(lang)).filter((p) => p.slug !== slug && p.g
 const doctorHref = pick(lang, '/doctor/', '/tr/doktor/');
 ---
 <Base lang={lang} title={`${entry.data.title} | Dr. Tolga Aksan | North Western Clinic`} description={entry.data.summary}
-  path={procedurePath(lang, slug)} alternates={{ en: procedurePath('en', slug), tr: procedurePath('tr', slug) }}>
+  path={procedurePath(lang, slug)} alternates={{ en: procedurePath('en', slug), tr: procedurePath('tr', slug) }}
+  jsonLd={[procedureJsonLd(lang, { slug, title: entry.data.title, summary: entry.data.summary }), breadcrumbJsonLd([{ name: 'Home', path: pick(lang, '/', '/tr/') }, { name: pick(lang, 'Procedures', 'İşlemler'), path: proceduresIndexPath(lang) }, { name: entry.data.title, path: procedurePath(lang, slug) }])]}>
   <article class="mx-auto max-w-3xl px-5 py-12">
     <a href={proceduresIndexPath(lang)} class="text-sm text-navy underline">← {pick(lang, 'All procedures', 'Tüm işlemler')}</a>
     <h1 class="mt-4 text-4xl font-bold">{entry.data.title}</h1>
