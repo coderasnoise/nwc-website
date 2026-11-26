@@ -1,0 +1,6 @@
+---
+import InfoPage from '../components/pages/InfoPage.astro';
+import { INFO_PAGES } from '../lib/info-pages';
+export function getStaticPaths() { return INFO_PAGES.map((p) => ({ params: { page: p.slug.en }, props: { id: p.id } })); }
+---
+<InfoPage lang="en" id={Astro.props.id} />

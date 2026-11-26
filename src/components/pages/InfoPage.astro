@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { INFO_PAGES, infoPagePath } from '../../lib/info-pages';
+import { REVIEW_NOTICE, REVIEW_NOTICE_TR, site } from '../../config/site';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang; id: string }
+const { lang, id } = Astro.props;
+const page = INFO_PAGES.find((p) => p.id === id)!;
+---
+<Base lang={lang} title={`${page.title[lang]} | North Western Clinic`} description={page.description[lang]}
+  path={infoPagePath(page, lang)} alternates={{ en: infoPagePath(page, 'en'), tr: infoPagePath(page, 'tr') }}>
+  <article class="mx-auto max-w-3xl px-5 py-12">
+    {page.draft && <p class="mb-4 rounded-md bg-amber-50 px-3 py-2 text-sm text-amber-900">{pick(lang, REVIEW_NOTICE, REVIEW_NOTICE_TR)}</p>}
+    <h1 class="text-4xl font-bold">{page.title[lang]}</h1>
+    <div class="mt-6 space-y-4 text-slate-700">
+      {page.body[lang].map((b) => b.h ? <h2 class="pt-4 text-2xl font-bold">{b.h}</h2> : <p>{b.p}</p>)}
+    </div>
+    {page.placeholderGallery && (
+      <ul class="mt-8 grid gap-4 sm:grid-cols-2">
+        {[1, 2, 3, 4].map((n) => <li class="flex aspect-[4/3] items-center justify-center rounded-xl bg-navy/10 text-sm text-navy/70">{pick(lang, `Before/after placeholder ${n}`, `Öncesi/sonrası yer tutucu ${n}`)}</li>)}
+      </ul>
+    )}
+    {page.reviewLinks && (
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a class="rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white" href={site.reviewLinks.trustpilot} rel="noopener" target="_blank">Trustpilot</a>
+        <a class="rounded-full border border-navy px-6 py-3 text-sm font-semibold text-navy" href={site.reviewLinks.google} rel="noopener" target="_blank">Google</a>
+      </div>
+    )}
+    <div class="mt-10"><WhatsAppButton lang={lang} /></div>
+  </article>
+</Base>
