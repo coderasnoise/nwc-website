@@ -1,0 +1,18 @@
+{
+  "nav.doctor": "Dr. Aksan",
+  "nav.procedures": "İşlemler",
+  "nav.results": "Sonuçlar",
+  "nav.journey": "Süreç",
+  "nav.blog": "Blog",
+  "nav.cta": "WhatsApp'tan yazın",
+  "cta.consult": "WhatsApp'tan ücretsiz online konsültasyon",
+  "cta.consultShort": "Ücretsiz konsültasyon",
+  "wa.default": "Merhaba, ücretsiz online konsültasyon almak istiyorum.",
+  "wa.procedure": "Merhaba, {procedure} hakkında ücretsiz online konsültasyon almak istiyorum.",
+  "footer.legal": "Yasal",
+  "footer.privacy": "Gizlilik",
+  "footer.terms": "Koşullar ve tıbbi sorumluluk reddi",
+  "footer.clinic": "Klinik",
+  "footer.team": "Ekip",
+  "footer.reviews": "Yorumlar"
+}
