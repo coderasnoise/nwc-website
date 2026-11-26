@@ -1,0 +1,6 @@
+---
+import ProcedurePage from '../../../components/pages/ProcedurePage.astro';
+import { PROCEDURE_ORDER } from '../../../lib/procedure-meta';
+export function getStaticPaths() { return PROCEDURE_ORDER.map((slug) => ({ params: { slug } })); }
+---
+<ProcedurePage lang="tr" slug={Astro.params.slug!} />
