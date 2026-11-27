@@ -4,13 +4,13 @@ import { pick, type Lang } from '../../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const items = [
-  [pick(lang, 'Turkish board', 'Türk board'), pick(lang, 'certified in plastic surgery', 'plastik cerrahi sertifikası')],
   [site.stats.operations, pick(lang, 'operations performed', 'ameliyat')],
   [site.stats.years, pick(lang, 'years in practice', 'yıllık deneyim')],
+  [pick(lang, 'Turkish board', 'Türk board'), pick(lang, 'certified in plastic surgery', 'plastik cerrahi sertifikası')],
 ];
 ---
-<section class="rule border-b border-line">
+<section class="border-y border-ink">
   <dl class="wrap grid divide-y divide-line sm:grid-cols-3 sm:divide-x sm:divide-y-0">
-    {items.map(([a, b], i) => <div data-reveal style={`--d:${i * 80}ms`} class="py-8 sm:px-8 sm:first:pl-0"><dt class="font-display text-4xl tracking-tight">{a}</dt><dd class="mt-1 text-sm text-muted">{b}</dd></div>)}
+    {items.map(([a, b]) => <div class="py-7 sm:px-8 sm:first:pl-0"><dt class="tnum font-display text-4xl tracking-tight">{a}</dt><dd class="mt-1 text-sm text-muted">{b}</dd></div>)}
   </dl>
 </section>

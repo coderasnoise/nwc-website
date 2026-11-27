@@ -4,23 +4,23 @@ import { pick, type Lang } from '../../i18n';
 interface Props { lang: Lang }
 const { lang } = Astro.props;
 const links = [
-  ['Trustpilot', site.reviewLinks.trustpilot, pick(lang, 'Read the reviews on Trustpilot', 'Trustpilot’taki yorumları oku')],
-  ['Google', site.reviewLinks.google, pick(lang, 'Read the reviews on Google', 'Google’daki yorumları oku')],
+  ['Trustpilot', site.reviewLinks.trustpilot, pick(lang, 'Read patient reviews on Trustpilot', 'Hasta yorumlarını Trustpilot’ta okuyun')],
+  ['Google', site.reviewLinks.google, pick(lang, 'Read patient reviews on Google', 'Hasta yorumlarını Google’da okuyun')],
 ];
 ---
-<section class="section">
-  <div class="wrap grid items-end gap-12 md:grid-cols-12">
-    <div data-reveal class="md:col-span-6">
-      <p class="eyebrow">{pick(lang, 'Reviews', 'Yorumlar')}</p>
-      <h2 class="mt-5">{pick(lang, 'Patients describe it in their own words.', 'Hastalarımız deneyimi kendi sözleriyle anlatıyor.')}</h2>
+<section class="section border-t border-line">
+  <div class="wrap grid gap-10 md:grid-cols-12">
+    <div data-reveal class="md:col-span-3"><p class="eyebrow">{pick(lang, 'Reviews', 'Yorumlar')}</p></div>
+    <div data-reveal style="--d:100ms" class="md:col-span-9">
+      <h2 class="max-w-[22ch]">{pick(lang, 'Read what patients say, on the platforms they wrote it.', 'Hastaların yazdıklarını, yazdıkları platformlarda okuyun.')}</h2>
+      <ul class="mt-10 border-t border-ink">
+        {links.map(([name, href, label]) => (
+          <li class="border-b border-line"><a href={href} rel="noopener" target="_blank" class="group flex items-baseline justify-between gap-6 py-6">
+            <span class="font-display text-3xl transition-colors duration-300 group-hover:text-clay md:text-4xl">{name}</span>
+            <span class="flex items-baseline gap-3 text-sm text-muted">{label}<span aria-hidden="true" class="text-lg text-clay transition-transform duration-300 group-hover:translate-x-1">↗</span></span>
+          </a></li>
+        ))}
+      </ul>
     </div>
-    <ul data-reveal style="--d:120ms" class="grid gap-3 md:col-span-5 md:col-start-8">
-      {links.map(([name, href, label]) => (
-        <li><a href={href} rel="noopener" target="_blank" class="group flex items-center justify-between rounded-2xl border border-line bg-paper px-6 py-5 transition-[transform,background-color] duration-300 ease-out active:scale-[0.98]">
-          <span><span class="block font-display text-2xl">{name}</span><span class="text-sm text-muted">{label}</span></span>
-          <span aria-hidden="true" class="text-xl text-clay transition-transform duration-500 ease-out group-hover:translate-x-1">↗</span>
-        </a></li>
-      ))}
-    </ul>
   </div>
 </section>

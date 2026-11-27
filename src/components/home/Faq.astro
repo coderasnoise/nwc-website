@@ -5,7 +5,7 @@ interface Props { lang: Lang }
 const { lang } = Astro.props;
 const entry = await getEntry('faq', lang);
 ---
-<section class="section bg-paper">
+<section class="section border-t border-line">
   <div class="wrap grid gap-10 md:grid-cols-12">
     <div data-reveal class="md:col-span-4"><p class="eyebrow">{pick(lang, 'Questions', 'Sorular')}</p><h2 class="mt-5">{pick(lang, 'Before you write to us', 'Yazmadan önce')}</h2></div>
     <div data-reveal style="--d:100ms" class="border-t border-line md:col-span-7 md:col-start-6">

@@ -14,8 +14,8 @@ const nav = [
 const current = Astro.url.pathname;
 const isCur = (href: string) => current === href || current.startsWith(href);
 ---
-<header class="sticky top-0 z-40 px-3 pt-3 sm:px-6" style="padding-top: max(0.75rem, env(safe-area-inset-top, 0px))">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-full border border-line bg-ivory/80 py-2 pl-5 pr-2 backdrop-blur-md">
+<header class="sticky top-0 z-40 border-b border-line bg-ivory" style="padding-top: env(safe-area-inset-top, 0px)">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-3">
     <a href={localePath(lang, '/')} class="flex items-center gap-3">
       <img src="/placeholders/logo.svg" alt="" width="28" height="28" />
       <span class="font-display text-base tracking-tight text-ink sm:text-lg">North Western <span class="text-clay">Clinic</span></span>
@@ -26,13 +26,13 @@ const isCur = (href: string) => current === href || current.startsWith(href);
     <div class="flex items-center gap-3">
       <LangSwitch lang={lang} href={altHref} />
       <div class="hidden sm:block"><WhatsAppButton lang={lang} label={t(lang, 'nav.cta')} size="sm" /></div>
-      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="menu-panel" aria-label={lang === 'en' ? 'Menu' : 'Menü'} class="menu-btn flex h-10 w-10 items-center justify-center rounded-full border border-line md:hidden">
+      <button id="menu-btn" type="button" aria-expanded="false" aria-controls="menu-panel" aria-label={lang === 'en' ? 'Menu' : 'Menü'} class="menu-btn flex h-11 w-11 items-center justify-center rounded-md border border-line md:hidden">
         <span class="relative block h-3 w-5"><i class="bar absolute left-0 top-0 block h-px w-5 bg-ink"></i><i class="bar absolute bottom-0 left-0 block h-px w-5 bg-ink"></i></span>
       </button>
     </div>
   </div>
 </header>
-<div id="menu-panel" data-open="false" class="menu-panel fixed inset-0 z-30 flex flex-col justify-between bg-ivory/95 px-6 pb-10 pt-28 backdrop-blur-xl md:hidden" style="height: 100dvh">
+<div id="menu-panel" data-open="false" class="menu-panel fixed inset-0 z-30 flex flex-col justify-between bg-ivory px-6 pb-10 pt-28 md:hidden" style="height: 100dvh">
   <nav aria-label="Main mobile" class="flex flex-col">
     {nav.map(([k, href], i) => <a href={href} style={`--i:${i}`} class="menu-link border-b border-line py-4 font-display text-4xl text-ink">{t(lang, k)}</a>)}
   </nav>

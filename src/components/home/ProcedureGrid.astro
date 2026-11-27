@@ -7,7 +7,7 @@ const all = await getProcedures(lang);
 const groups = [['face', pick(lang, 'Face', 'Yüz')], ['body', pick(lang, 'Body', 'Vücut')]] as const;
 let n = 0;
 ---
-<section class="section">
+<section class="section border-t border-line">
   <div class="wrap">
     <div data-reveal class="grid gap-6 md:grid-cols-12">
       <p class="eyebrow md:col-span-3">{pick(lang, 'Procedures', 'İşlemler')}</p>

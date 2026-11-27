@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        ivory: '#f8f5ef',
-        paper: '#efe9de',
+        ivory: '#fbfaf6',
+        paper: '#f1eee6',
         ink: '#1a1d24',
-        muted: '#5d6068',
-        line: '#dcd3c4',
+        muted: '#575a62',
+        line: '#d9d4c7',
         navy: { DEFAULT: '#14243b', 700: '#1d3556', 100: '#e8edf5' },
-        clay: '#8a5a3c',
+        clay: '#7a4a2e',
         wa: '#1f6b47',
       },
       fontFamily: {
