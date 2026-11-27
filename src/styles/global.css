@@ -4,19 +4,54 @@
 @tailwind components;
 @tailwind utilities;
 
+:root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
+
 @layer base {
-  html { scroll-behavior: smooth; }
-  body { @apply bg-ivory text-ink; font-size: 1.0625rem; line-height: 1.7; }
-  h1, h2, h3 { font-family: theme('fontFamily.display'); color: theme('colors.ink'); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; font-variation-settings: 'opsz' 96, 'SOFT' 50; }
-  h1 { @apply text-5xl md:text-7xl; letter-spacing: -0.03em; }
-  h2 { @apply text-3xl md:text-4xl; }
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+  }
+  body { @apply bg-ivory text-ink; font-size: 1rem; line-height: 1.7; text-wrap: pretty; }
+  h1, h2, h3 { font-family: theme('fontFamily.display'); color: theme('colors.ink'); font-weight: 400; letter-spacing: -0.02em; line-height: 1.08; font-variation-settings: 'opsz' 120, 'SOFT' 40; text-wrap: balance; }
+  h1 { @apply text-5xl sm:text-7xl lg:text-8xl; letter-spacing: -0.035em; line-height: 1; }
+  h2 { @apply text-4xl md:text-5xl; }
   a { text-underline-offset: 4px; }
-  ::selection { background: #e6d9c6; }
+  ::selection { background: #e6d3bd; }
+  button, a, [role='button'] { touch-action: manipulation; }
+  :focus-visible { outline: 2px solid theme('colors.navy.DEFAULT'); outline-offset: 3px; border-radius: 4px; }
 }
 
 @layer components {
-  .eyebrow { @apply text-xs font-medium uppercase text-clay; letter-spacing: 0.18em; }
+  .eyebrow { @apply text-xs font-medium uppercase text-clay; letter-spacing: 0.2em; }
   .wrap { @apply mx-auto max-w-6xl px-6; }
-  .section { @apply py-20 md:py-28; }
+  .section { @apply py-24 md:py-32; }
   .rule { @apply border-t border-line; }
+  .link-u { @apply border-b border-ink/40 pb-1 text-ink transition-colors duration-300 ease-out; }
+  @media (hover: hover) and (pointer: fine) { .link-u:hover { @apply border-ink; } }
+}
+
+/* Reveals: only hidden when JS is present, so content never depends on scripts. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  transition-delay: var(--d, 0ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Tagline: words wake up one at a time. */
+.tagline .w { opacity: 1; transition: opacity 500ms var(--ease); }
+.js .tagline .w { opacity: 0.28; }
+.js .tagline .w.on { opacity: 1; }
+
+/* Hero entrance: one lead, supports follow, portrait carries itself. */
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.hero-in { animation: rise 800ms var(--ease) both; animation-delay: var(--d, 0ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal] { transform: none; transition: opacity 200ms linear; transition-delay: 0ms; }
+  .hero-in { animation: none; }
+  .js .tagline .w { opacity: 1; }
 }

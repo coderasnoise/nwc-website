@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        ivory: '#faf7f2',
-        paper: '#f3eee6',
+        ivory: '#f8f5ef',
+        paper: '#efe9de',
         ink: '#1a1d24',
         muted: '#5d6068',
-        line: '#ddd5c8',
+        line: '#dcd3c4',
         navy: { DEFAULT: '#14243b', 700: '#1d3556', 100: '#e8edf5' },
-        clay: '#8c6e52',
+        clay: '#8a5a3c',
         wa: '#1f6b47',
       },
       fontFamily: {
@@ -18,6 +18,7 @@ export default {
         sans: ['"Hanken Grotesk Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       letterSpacing: { tightest: '-0.03em' },
+      transitionTimingFunction: { out: 'cubic-bezier(0.22, 1, 0.36, 1)' },
     },
   },
 };

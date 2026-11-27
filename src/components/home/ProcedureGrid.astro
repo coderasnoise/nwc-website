@@ -7,29 +7,29 @@ const all = await getProcedures(lang);
 const groups = [['face', pick(lang, 'Face', 'Yüz')], ['body', pick(lang, 'Body', 'Vücut')]] as const;
 let n = 0;
 ---
-<section class="section bg-paper">
+<section class="section">
   <div class="wrap">
-    <div class="grid gap-6 md:grid-cols-12">
+    <div data-reveal class="grid gap-6 md:grid-cols-12">
       <p class="eyebrow md:col-span-3">{pick(lang, 'Procedures', 'İşlemler')}</p>
       <h2 class="md:col-span-8">{pick(lang, 'What Dr. Aksan operates on', 'Dr. Aksan’ın ameliyat ettiği bölgeler')}</h2>
     </div>
     {groups.map(([g, label]) => (
-      <div class="mt-14 grid gap-4 md:grid-cols-12">
-        <h3 class="text-xl text-clay md:col-span-3">{label}</h3>
-        <ul class="md:col-span-9 border-t border-line">
+      <div data-reveal class="mt-16 grid gap-4 md:grid-cols-12">
+        <h3 class="text-2xl text-clay md:col-span-3">{label}</h3>
+        <ul class="border-t border-line md:col-span-9">
           {all.filter((p) => p.group === g).map((p) => (
             <li class="border-b border-line"><a href={procedurePath(lang, p.slug)} class="group grid gap-1 py-6 sm:grid-cols-[3rem_1fr_auto] sm:items-baseline sm:gap-6">
               <span class="hidden text-sm text-clay sm:block">{String(++n).padStart(2, '0')}</span>
               <span>
-                <span class="font-display text-2xl transition-colors group-hover:text-clay">{p.title}</span>
-                <span class="mt-1 block max-w-xl text-[0.95rem] text-muted">{p.summary}</span>
+                <span class="font-display text-2xl transition-colors duration-300 ease-out group-hover:text-clay">{p.title}</span>
+                <span class="mt-1 block max-w-xl text-sm text-muted">{p.summary}</span>
               </span>
-              <span aria-hidden="true" class="hidden text-xl text-clay transition-transform group-hover:translate-x-1 sm:block">→</span>
+              <span aria-hidden="true" class="hidden text-xl text-clay transition-transform duration-500 ease-out group-hover:translate-x-1 sm:block">→</span>
             </a></li>
           ))}
         </ul>
       </div>
     ))}
-    <p class="mt-10 md:pl-[25%]"><a href={proceduresIndexPath(lang)} class="border-b border-ink pb-1">{pick(lang, 'All procedures', 'Tüm işlemler')}</a></p>
+    <p class="mt-12 md:pl-[25%]"><a href={proceduresIndexPath(lang)} class="link-u">{pick(lang, 'All procedures', 'Tüm işlemler')}</a></p>
   </div>
 </section>
