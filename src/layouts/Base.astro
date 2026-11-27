@@ -1,0 +1,79 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { site } from '../config/site';
+import type { Lang } from '../i18n';
+import { localePath } from '../i18n';
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  path: string; // canonical path of this page
+  alternates?: { en?: string; tr?: string };
+  jsonLd?: object[];
+  noindex?: boolean;
+}
+const { lang, title, description, path, alternates = {}, jsonLd = [], noindex = false } = Astro.props;
+const canonical = new URL(path, site.url).href;
+const alt = alternates[lang === 'en' ? 'tr' : 'en'] ?? localePath(lang === 'en' ? 'tr' : 'en', '/');
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fbfaf6" />
+    <script is:inline>document.documentElement.classList.add('js')</script>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {alternates.en && <link rel="alternate" hreflang="en" href={new URL(alternates.en, site.url).href} />}
+    {alternates.tr && <link rel="alternate" hreflang="tr" href={new URL(alternates.tr, site.url).href} />}
+    {alternates.en && <link rel="alternate" hreflang="x-default" href={new URL(alternates.en, site.url).href} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'en' ? 'en_US' : 'tr_TR'} />
+    {(noindex || site.draftMode) && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/placeholders/logo.svg" type="image/svg+xml" />
+    {jsonLd.map((o) => <script type="application/ld+json" set:html={JSON.stringify(o)} />)}
+  </head>
+  <body class="font-sans antialiased">
+    <a href="#main" class="sr-only rounded-md bg-ink px-5 py-3 text-sm text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50">{lang === 'en' ? 'Skip to content' : 'İçeriğe geç'}</a>
+    <Header lang={lang} altHref={alt} />
+    <main id="main"><slot /></main>
+    <Footer lang={lang} />
+    <div class="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-ivory px-4 pt-3 sm:hidden" style="padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px))">
+      <div class="flex justify-center"><WhatsAppButton lang={lang} /></div>
+    </div>
+    <div class="h-20 sm:hidden"></div>
+    <script is:inline>
+      (function () {
+        var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var once = function (sel, cls, opts) {
+          var els = document.querySelectorAll(sel);
+          if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add(cls); }); return; }
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add(cls); io.unobserve(en.target); } });
+          }, opts);
+          els.forEach(function (e) { io.observe(e); });
+        };
+        once('[data-reveal]', 'is-in', { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        if (!reduce) once('.tagline .w', 'on', { rootMargin: '0px 0px -38% 0px', threshold: 0 });
+        var btn = document.getElementById('menu-btn'), panel = document.getElementById('menu-panel');
+        if (btn && panel) {
+          var set = function (open) {
+            btn.setAttribute('aria-expanded', open); panel.dataset.open = open;
+            document.documentElement.style.overflow = open ? 'hidden' : '';
+          };
+          btn.addEventListener('click', function () { set(btn.getAttribute('aria-expanded') !== 'true'); });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+          panel.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+        }
+      })();
+    </script>
+  </body>
+</html>

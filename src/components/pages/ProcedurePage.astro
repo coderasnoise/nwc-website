@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { getProcedures, procedurePath, proceduresIndexPath } from '../../lib/procedures';
+import { pick, type Lang } from '../../i18n';
+import { procedureJsonLd, breadcrumbJsonLd } from '../../lib/jsonld';
+interface Props { lang: Lang; slug: string }
+const { lang, slug } = Astro.props;
+const entry = (await getCollection('procedures')).find((e) => e.id === `${lang}/${slug}`)!;
+const { Content } = await render(entry);
+const related = (await getProcedures(lang)).filter((p) => p.slug !== slug && p.group === entry.data.group).slice(0, 3);
+const doctorHref = pick(lang, '/doctor/', '/tr/doktor/');
+---
+<Base lang={lang} title={`${entry.data.title} | Dr. Tolga Aksan | North Western Clinic`} description={entry.data.summary}
+  path={procedurePath(lang, slug)} alternates={{ en: procedurePath('en', slug), tr: procedurePath('tr', slug) }}
+  jsonLd={[procedureJsonLd(lang, { slug, title: entry.data.title, summary: entry.data.summary }), breadcrumbJsonLd([{ name: 'Home', path: pick(lang, '/', '/tr/') }, { name: pick(lang, 'Procedures', 'İşlemler'), path: proceduresIndexPath(lang) }, { name: entry.data.title, path: procedurePath(lang, slug) }])]}>
+  <article class="wrap max-w-3xl py-16 md:py-24">
+    <a href={proceduresIndexPath(lang)} class="text-sm text-muted transition-colors duration-300 hover:text-ink">← {pick(lang, 'All procedures', 'Tüm işlemler')}</a>
+    <h1 class="mt-6 text-5xl md:text-7xl">{entry.data.title}</h1>
+    <p class="mt-6 max-w-[40ch] text-xl text-muted">{entry.data.summary}</p>
+    <div class="prose-copy mt-8 space-y-4 [&_h2]:mt-8 [&_h2]:text-3xl "><Content /></div>
+    <p class="mt-6 text-sm text-muted">{pick(lang, 'Performed by', 'Uygulayan')} <a class="underline" href={doctorHref}>Dr. Tolga Aksan</a>.</p>
+    <div class="mt-8"><WhatsAppButton lang={lang} procedure={entry.data.title} /></div>
+    {related.length > 0 && (
+      <aside class="mt-12 border-t border-line pt-6">
+        <h2 class="text-2xl">{pick(lang, 'Related procedures', 'İlgili işlemler')}</h2>
+        <ul class="mt-2 border-t border-line">{related.map((r) => <li class="border-b border-line"><a class="block py-4 font-display text-xl transition-colors duration-300 hover:text-clay" href={procedurePath(lang, r.slug)}>{r.title}</a></li>)}</ul>
+      </aside>
+    )}
+  </article>
+</Base>

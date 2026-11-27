@@ -1,0 +1,19 @@
+---
+import { getEntry, render } from 'astro:content';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const entry = await getEntry('doctor', lang);
+const { Content } = await render(entry!);
+const href = pick(lang, '/doctor/', '/tr/doktor/');
+---
+<section class="section border-t border-line">
+  <div class="wrap grid gap-10 md:grid-cols-12">
+    <div data-reveal class="md:col-span-3"><p class="eyebrow">{pick(lang, 'The surgeon', 'Cerrah')}</p></div>
+    <div data-reveal style="--d:100ms" class="md:col-span-8">
+      <h2>{entry!.data.name}</h2>
+      <div class="mt-8 max-w-[56ch] space-y-4 text-lg text-ink"><Content /></div>
+      <a href={href} class="link-u mt-10 inline-block">{pick(lang, 'More about Dr. Aksan', 'Dr. Aksan hakkında daha fazlası')}</a>
+    </div>
+  </div>
+</section>

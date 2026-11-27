@@ -1,0 +1,36 @@
+---
+import { site } from '../../config/site';
+import { pick, type Lang } from '../../i18n';
+import WhatsAppButton from '../WhatsAppButton.astro';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const facts = [
+  [pick(lang, 'Specialty', 'Uzmanlık'), pick(lang, 'Plastic surgery, face and body', 'Plastik cerrahi, yüz ve vücut')],
+  [pick(lang, 'Certification', 'Sertifika'), pick(lang, 'Turkish board certified', 'Türk board sertifikalı')],
+  [pick(lang, 'Based in', 'Konum'), pick(lang, 'Acıbadem, Istanbul', 'Acıbadem, İstanbul')],
+  [pick(lang, 'Languages', 'Diller'), pick(lang, 'English, Turkish', 'Türkçe, İngilizce')],
+  [pick(lang, 'First consultation', 'İlk konsültasyon'), pick(lang, 'Free, online, on WhatsApp', 'Ücretsiz, online, WhatsApp’tan')],
+];
+---
+<section>
+  <div class="wrap grid gap-12 pb-16 pt-12 md:grid-cols-12 md:gap-8 md:pb-24 md:pt-24">
+    <div class="md:col-span-8">
+      <p class="eyebrow hero-in">{pick(lang, 'Plastic surgeon · Istanbul', 'Plastik cerrah · İstanbul')}</p>
+      <h1 class="hero-in mt-6" style="--d:80ms">{site.doctor.name}</h1>
+      <p class="hero-in mt-8 max-w-[36ch] text-xl text-ink md:text-2xl" style="--d:200ms">{pick(lang,
+        'Face and body surgery, planned for one person at a time.',
+        'Yüz ve vücut ameliyatları, her kişi için ayrı planlanır.')}</p>
+      <div class="hero-in mt-10 flex flex-wrap items-center gap-x-6 gap-y-4" style="--d:300ms">
+        <WhatsAppButton lang={lang} />
+        <p class="text-sm text-muted">
+          {pick(lang, 'Patient reviews:', 'Hasta yorumları:')}
+          <a href={site.reviewLinks.trustpilot} rel="noopener" target="_blank" class="text-ink underline">Trustpilot</a>
+          · <a href={site.reviewLinks.google} rel="noopener" target="_blank" class="text-ink underline">Google</a>
+        </p>
+      </div>
+    </div>
+    <dl class="hero-in self-end border-t border-ink md:col-span-4" style="--d:250ms">
+      {facts.map(([k, v]) => <div class="flex justify-between gap-6 border-b border-line py-3 text-sm"><dt class="text-muted">{k}</dt><dd class="text-right text-ink">{v}</dd></div>)}
+    </dl>
+  </div>
+</section>

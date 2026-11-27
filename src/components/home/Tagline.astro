@@ -1,0 +1,15 @@
+---
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const text = pick(lang,
+  'Natural results begin with an honest plan, made for one face and one body: yours.',
+  'Doğal sonuç, tek bir yüz ve tek bir beden için hazırlanan dürüst bir planla başlar: sizinki.');
+---
+<section class="section">
+  <div class="wrap">
+    <p class="tagline max-w-[22ch] font-display text-4xl leading-[1.12] tracking-tight sm:max-w-[26ch] md:text-6xl" style="font-variation-settings: 'opsz' 120, 'SOFT' 40">
+      {text.split(' ').map((w) => <Fragment><span class="w">{w}</span>{' '}</Fragment>)}
+    </p>
+  </div>
+</section>

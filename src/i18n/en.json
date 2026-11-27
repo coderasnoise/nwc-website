@@ -1,0 +1,18 @@
+{
+  "nav.doctor": "Dr. Aksan",
+  "nav.procedures": "Procedures",
+  "nav.results": "Results",
+  "nav.journey": "Journey",
+  "nav.blog": "Blog",
+  "nav.cta": "WhatsApp",
+  "cta.consult": "Free online consultation on WhatsApp",
+  "cta.consultShort": "Free consultation",
+  "wa.default": "Hello, I'd like a free online consultation.",
+  "wa.procedure": "Hello, I'd like a free online consultation about {procedure}.",
+  "footer.legal": "Legal",
+  "footer.privacy": "Privacy",
+  "footer.terms": "Terms and medical disclaimer",
+  "footer.clinic": "Clinic",
+  "footer.team": "Team",
+  "footer.reviews": "Reviews"
+}

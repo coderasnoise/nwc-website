@@ -1,0 +1,26 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { pick, type Lang } from '../../i18n';
+import { physicianJsonLd, breadcrumbJsonLd } from '../../lib/jsonld';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const entry = (await getEntry('doctor', lang))!;
+const { Content } = await render(entry);
+---
+<Base lang={lang} title={`${entry.data.name} | ${entry.data.title}`}
+  description={pick(lang, 'Dr. Tolga Aksan, Turkish board-certified plastic surgeon in Istanbul. Co-founder of North Western Clinic.', 'Dr. Tolga Aksan, İstanbul’da Türk board sertifikalı plastik cerrah. North Western Clinic kurucu ortağı.')}
+  path={pick(lang, '/doctor/', '/tr/doktor/')} alternates={{ en: '/doctor/', tr: '/tr/doktor/' }}
+  jsonLd={[physicianJsonLd(lang), breadcrumbJsonLd([{ name: 'Home', path: pick(lang, '/', '/tr/') }, { name: entry.data.name, path: pick(lang, '/doctor/', '/tr/doktor/') }])]}>
+  <div class="wrap grid gap-12 py-16 md:grid-cols-12">
+    <img src="/placeholders/doctor-portrait.svg" alt={pick(lang, 'Dr. Tolga Aksan (placeholder portrait)', 'Dr. Tolga Aksan (yer tutucu portre)')} width="600" height="750" class="aspect-[4/5] w-full rounded-md object-cover md:col-span-5" />
+    <div class="space-y-5 md:col-span-6 md:col-start-7">
+      <h1 class="text-5xl md:text-6xl">{entry.data.name}</h1>
+      <p class="text-lg text-muted">{entry.data.title}</p>
+      <div class="space-y-3"><Content /></div>
+      <div class="flex aspect-video items-center justify-center rounded-md border border-line bg-paper text-sm text-clay">{pick(lang, 'Intro video placeholder', 'Tanıtım videosu yer tutucu')}</div>
+      <WhatsAppButton lang={lang} />
+    </div>
+  </div>
+</Base>

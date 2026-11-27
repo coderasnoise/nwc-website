@@ -1,0 +1,7 @@
+---
+import type { Lang } from '../i18n';
+interface Props { lang: Lang; href: string }
+const { lang, href } = Astro.props;
+const target = lang === 'en' ? 'TR' : 'EN';
+---
+<a href={href} hreflang={lang === 'en' ? 'tr' : 'en'} class="text-xs font-medium tracking-widest text-muted hover:text-ink">{target}</a>

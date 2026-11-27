@@ -1,0 +1,33 @@
+---
+import { site, REVIEW_NOTICE, REVIEW_NOTICE_TR } from '../config/site';
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const p = (en: string, tr: string) => (lang === 'en' ? en : tr);
+const link = 'text-white/80 transition-colors hover:text-white';
+---
+<footer class="mt-0 bg-ink text-white">
+  <div class="wrap grid gap-12 py-16 md:grid-cols-3">
+    <div>
+      <p class="font-display text-2xl">North Western Clinic</p>
+      <p class="mt-3 max-w-xs text-sm text-white/70">{p('Plastic surgery in Istanbul, led by Dr. Tolga Aksan.', 'İstanbul’da Dr. Tolga Aksan öncülüğünde plastik cerrahi.')}</p>
+    </div>
+    <div class="text-sm leading-7">
+      <p class="eyebrow !text-white/65">{t(lang, 'footer.clinic')}</p>
+      <p class="mt-3"><a class={link} href={site.mapUrl} rel="noopener" target="_blank">{site.address}</a></p>
+      <p><a class={link} href={`tel:${site.phoneDisplay.replaceAll(' ', '')}`}>{site.phoneDisplay}</a></p>
+    </div>
+    <div class="text-sm leading-7">
+      <p class="eyebrow !text-white/65">{t(lang, 'footer.legal')}</p>
+      <ul class="mt-3">
+        <li><a class={link} href={lang === 'en' ? '/team/' : '/tr/ekip/'}>{t(lang, 'footer.team')}</a></li>
+        <li><a class={link} href={lang === 'en' ? '/reviews/' : '/tr/yorumlar/'}>{t(lang, 'footer.reviews')}</a></li>
+        <li><a class={link} href={lang === 'en' ? '/clinic/' : '/tr/klinik/'}>{t(lang, 'footer.clinic')}</a></li>
+        <li><a class={link} href={lang === 'en' ? '/privacy/' : '/tr/gizlilik/'}>{t(lang, 'footer.privacy')}</a></li>
+        <li><a class={link} href={lang === 'en' ? '/terms/' : '/tr/kosullar/'}>{t(lang, 'footer.terms')}</a></li>
+      </ul>
+    </div>
+  </div>
+  {site.draftMode && <p class="border-t border-white/10 px-6 py-2.5 text-center text-xs tracking-wide text-white/70">{p(REVIEW_NOTICE, REVIEW_NOTICE_TR)}</p>}
+  <p class="border-t border-white/10 px-6 py-5 text-center text-xs text-white/65">© {new Date().getFullYear()} North Western Clinic</p>
+</footer>

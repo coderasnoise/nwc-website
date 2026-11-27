@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WhatsAppButton from '../WhatsAppButton.astro';
+import { pick, type Lang } from '../../i18n';
+interface Props { lang: Lang; slug: string }
+const { lang, slug } = Astro.props;
+const entry = (await getCollection('blog')).find((e) => e.id === `${lang}/${slug}`)!;
+const { Content } = await render(entry);
+const base = pick(lang, '/blog/', '/tr/blog/');
+const other = lang === 'en' ? 'tr' : 'en';
+const hasOther = (await getCollection('blog')).some((e) => e.id === `${other}/${slug}` && !e.data.draft);
+const alternates = { [lang]: `${base}${slug}/`, ...(hasOther ? { [other]: `${lang === 'en' ? '/tr/blog/' : '/blog/'}${slug}/` } : {}) };
+const updated = entry.data.updated;
+---
+<Base lang={lang} title={`${entry.data.title} | North Western Clinic`} description={entry.data.description ?? entry.data.title}
+  path={`${base}${slug}/`} alternates={alternates}>
+  <article class="wrap max-w-3xl py-16">
+    <a href={base} class="text-sm text-navy underline">← Blog</a>
+    <h1 class="mt-4 text-4xl md:text-5xl">{entry.data.title}</h1>
+    <p class="mt-2 text-sm text-muted">{entry.data.author} · {entry.data.date.toISOString().slice(0, 10)}{updated && ` · ${pick(lang, 'Updated', 'Güncellendi')} ${updated.toISOString().slice(0, 10)}`}</p>
+    <div class="mt-6 space-y-4"><Content /></div>
+    <div class="mt-10"><WhatsAppButton lang={lang} /></div>
+  </article>
+</Base>
